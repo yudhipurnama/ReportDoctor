@@ -24,10 +24,11 @@
   <link rel="stylesheet" href="{{ asset('assets/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
   <!-- iCheck for checkboxes and radio inputs -->
   <link rel="stylesheet" href="{{ asset('assets/plugins/iCheck/all.css') }}">
+  <!-- DataTable -->
+  <link rel="stylesheet" type="text/css" href="<?= URL::to('/'); ?>/css/jquery.dataTables.css">
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-  <!-- DataTables -->
-  {{-- <link rel="stylesheet" href="{{ asset('assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}"> --}}
+  <link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
 
 </head>
 <body class="hold-transition skin-blue-light layout-top-nav">
@@ -57,6 +58,8 @@
 </div>
 <!-- ./wrapper -->
 
+<!-- DataTable -->
+<script type="text/javascript" charset="utf8" src="<?= URL::to('/'); ?>/js/jquery.dataTables.js" defer></script>
 <!-- jQuery 3 -->
 <script src="{{ asset('assets/bower_components/jquery/dist/jquery.min.js') }}"></script>
 <!-- Bootstrap 3.3.7 -->
@@ -82,14 +85,13 @@
 <script src="{{ asset('assets/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
 <!-- iCheck 1.0.1 -->
 <script src="{{ asset('assets/plugins/iCheck/icheck.min.js') }}"></script>
-<!-- DataTables -->
-{{-- <script src="{{ asset('assets/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script> --}}
+
+@stack('scripts')
 
 <script>
-    $(function () {
-        $('.select2').select2()
-    });
+  $(function () {
+    $('.select2').select2()
+  });
 </script>
 </body>
 </html>

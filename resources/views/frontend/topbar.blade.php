@@ -12,7 +12,7 @@
         <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="{{ Request::is('home') ? 'active' : '' }}"><a href="{{ route('home') }}">Home</a></li>
-            <li class="{{ Request::is('home/monitoring') ? 'active' : '' }}"><a href="{{ route('monitoring') }}">Monitoring <span class="sr-only"></span></a></li>
+            <li class="{{ Request::is('home/morning-report') ? 'active' : '' }}"><a href="{{ route('morningReport') }}">Monitoring <span class="sr-only"></span></a></li>
             <li><a href="#">Link</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Link Dropdown <span class="caret"></span></a>

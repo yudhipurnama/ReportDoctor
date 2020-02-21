@@ -21,7 +21,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="name">Nama :</label>
-                            <input type="text" name="nama" id="nama" class="form-control">
+                            <input type="text" name="nama_dokter" id="nama_dokter" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="moderator_mr">Moderator MR :</label>
@@ -78,28 +78,20 @@
             </div>
             <div class="box-body">
                 <div class="table-resposive">
-                    <table id="example1" class="table table-bordered table-striped table-condensed">
+                    <table class="table table-bordered table-striped table-condensed data-table">
                         <thead class="bg-info">
                             <tr>
-                                <th>No</th>
+                                {{-- <th>No</th> --}}
                                 <th>Nama</th>
-                                <th>Waktu</th>
                                 <th>Tanggal</th>
+                                <th>Waktu</th>
                                 <th>Moderator MR</th>
                                 <th>Keterangan</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($data as $d)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $d->nama }}</td>
-                                    <td>{{ $d->waktu }}</td>
-                                    <td>{{ $d->tgl }}</td>
-                                    <td>{{ $d->moderator_mr }}</td>
-                                    <td>{{ $d->keterangan }}</td>
-                                </tr>
-                            @endforeach
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -107,4 +99,34 @@
     </div>
 </div>
 </section>
+
+@push('scripts')
+<script type="text/javascript">
+    $(function () {
+        table = $('.data-table').DataTable({
+            processing: true,
+            serverSide: true,
+            rowReorder: {
+                selector: 'td:nth-child(2)'
+            },
+            responsive: true,
+            ajax:{
+                url: "{{ route('morningReport') }}",
+                method: "GET",
+                xhrFields: {
+                        withCredentials: true
+                }
+            },
+            columns: [
+                {data: 'nama_dokter'},
+                {data: 'tgl'},
+                {data: 'waktu'},
+                {data: 'moderator_mr'},
+                {data: 'keterangan'},
+                {data: 'action', orderable: false, searchable: false},
+            ]
+        });
+    });
+</script>    
+@endpush
 @endsection

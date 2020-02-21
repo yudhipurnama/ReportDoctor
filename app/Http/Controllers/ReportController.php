@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Yajra\Datatables\Datatables;
 use \App\Model\MorningReport;
+use DB;
 
 class ReportController extends Controller
 {
@@ -12,11 +14,23 @@ class ReportController extends Controller
         $this->middleware('auth');
     }
 
-    public function morningReport()
+    public function morningReport(Request $request)
     {
-        $data = MorningReport::orderBy('id', 'desc')->paginate(100);
+        if ($request->ajax()) {
+
+            $data = MorningReport::all();
+           
+            return Datatables::of($data)
+                    ->addColumn('action', function($data){  
+                        $btn = '<button onclick="btnUbah('.$data->id.')" name="btnUbah" type="button" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-edit"></span></button>';
+                        $delete = '<button onclick="btnDel('.$data->id.')" name="btnDel" type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span></button>';
+                        return $btn .'&nbsp'. $delete; 
+                    })
+                    ->rawColumns(['action'])
+                    ->addIndexColumn()
+                    ->make(true);
+        }
         return view('frontend.morning_report', [
-            'data'      => $data,
             'title'     => 'Morning Report',
             'subtitle'  => 'Data Morning Report'
         ]);
@@ -26,7 +40,7 @@ class ReportController extends Controller
     {
         $report = new MorningReport;
         $report->user_id = auth()->user()->id;
-        $report->nama = $request->nama;
+        $report->nama_dokter = $request->nama_dokter;
         $report->waktu = $request->waktu;
         $report->tgl = $request->tgl;
         $report->moderator_mr = $request->moderator_mr;
@@ -34,6 +48,6 @@ class ReportController extends Controller
         $report->save();
         // dd($report);
 
-        return redirect()->route('morning-report')->with('sukses', 'Data berhasil di input');
+        return redirect()->route('morningReport')->with('sukses', 'Data berhasil di input');
     }
 }
