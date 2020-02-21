@@ -22,8 +22,8 @@ Route::group(['middleware' => 'auth'], function(){
     Route::group(['prefix' => 'home'], function(){
         Route::get('', 'HomeController@index')->name('home');
         // Monitoring
-        Route::get('/monitoring', 'ReportController@monitoring')->name('monitoring');
-        Route::post('/simpan-monitoring', 'ReportController@simpan_monitoring')->name('simpan_monitoring');
+        Route::get('/morning-report', 'ReportController@morningReport')->name('morningReport');
+        Route::post('/simpan-morning-report', 'ReportController@simpan_morningReport')->name('simpan_morningReport');
     });
 });
 

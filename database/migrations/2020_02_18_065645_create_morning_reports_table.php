@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMonitoringsTable extends Migration
+class CreateMorningReportsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateMonitoringsTable extends Migration
      */
     public function up()
     {
-        Schema::create('monitorings', function (Blueprint $table) {
+        Schema::create('morning_reports', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
-            $table->string('nama', 100);
-            $table->time('waktu');
+            $table->string('nama_dokter', 100);
             $table->date('tgl');
+            $table->time('waktu');
             $table->string('moderator_mr');
             $table->longText('keterangan');
             $table->timestamps();
@@ -34,6 +34,6 @@ class CreateMonitoringsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('monitorings');
+        Schema::dropIfExists('morning_reports');
     }
 }

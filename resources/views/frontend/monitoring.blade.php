@@ -1,6 +1,6 @@
 @extends('frontend.master')
 @section('title')
-    Monitoring
+    Morning Report
 @stop
 @section('content')
 <section class="content">
@@ -15,7 +15,7 @@
                 </div>
             </div>
 
-            <form action="{{ route('simpan_monitoring') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('simpan_morningReport') }}" method="POST" enctype="multipart/form-data">
                 <div class="box-body">
                     @csrf
                     <div class="col-sm-6">
@@ -35,12 +35,12 @@
 
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="waktu">Waktu :</label>
-                            <input type="time" name="waktu" id="waktu" class="form-control">
-                        </div>
-                        <div class="form-group">
                             <label for="tgl">Tanggal :</label>
                             <input type="date" name="tgl" id="tgl" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="waktu">Waktu :</label>
+                            <input type="time" name="waktu" id="waktu" class="form-control">
                         </div>
                     </div>
 

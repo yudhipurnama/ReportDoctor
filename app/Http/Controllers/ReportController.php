@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use \App\Model\Monitoring;
+use \App\Model\MorningReport;
 
 class ReportController extends Controller
 {
@@ -12,28 +12,28 @@ class ReportController extends Controller
         $this->middleware('auth');
     }
 
-    public function monitoring()
+    public function morningReport()
     {
-        $data = Monitoring::orderBy('id', 'desc')->paginate(100);
-        return view('frontend.monitoring', [
+        $data = MorningReport::orderBy('id', 'desc')->paginate(100);
+        return view('frontend.morning_report', [
             'data'      => $data,
-            'title'     => 'Monitoring',
-            'subtitle'  => 'Hasil Monitoring'
+            'title'     => 'Morning Report',
+            'subtitle'  => 'Data Morning Report'
         ]);
     }
 
-    public function simpan_monitoring(Request $request)
+    public function simpan_morningReport(Request $request)
     {
-        $monitoring = new Monitoring;
-        $monitoring->user_id = auth()->user()->id;
-        $monitoring->nama = $request->nama;
-        $monitoring->waktu = $request->waktu;
-        $monitoring->tgl = $request->tgl;
-        $monitoring->moderator_mr = $request->moderator_mr;
-        $monitoring->keterangan = $request->keterangan;
-        $monitoring->save();
-        // dd($monitoring);
+        $report = new MorningReport;
+        $report->user_id = auth()->user()->id;
+        $report->nama = $request->nama;
+        $report->waktu = $request->waktu;
+        $report->tgl = $request->tgl;
+        $report->moderator_mr = $request->moderator_mr;
+        $report->keterangan = $request->keterangan;
+        $report->save();
+        // dd($report);
 
-        return redirect()->route('monitoring')->with('sukses', 'Data berhasil di input');
+        return redirect()->route('morning-report')->with('sukses', 'Data berhasil di input');
     }
 }
